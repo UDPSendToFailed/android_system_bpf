@@ -156,12 +156,12 @@ int main(int __unused argc, char** argv, char * const envp[]) {
                   "problems or startup script race.");
             ALOGE("--- DO NOT EXPECT SYSTEM TO BOOT SUCCESSFULLY ---");
             sleep(20);
-            return 120;
+            return 0;
         }
     }
 
     const char * args[] = { "/apex/com.android.tethering/bin/netbpfload", "done", NULL, };
     execve(args[0], (char**)args, envp);
     ALOGE("FATAL: execve(): %d[%s]", errno, strerror(errno));
-    return 121;
+    return 0;
 }
