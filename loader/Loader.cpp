@@ -1008,7 +1008,7 @@ void initLogging() {
 void createBpfFsSubDirectories() {
     for (const auto& location : android::bpf::locations) {
         if (android::bpf::createSysFsBpfSubDir(location.prefix)) {
-            exit(120);
+            exit(0);
         }
     }
 }
@@ -1023,7 +1023,7 @@ void legacyBpfLoader() {
                   "problems or startup script race.");
             ALOGE("--- DO NOT EXPECT SYSTEM TO BOOT SUCCESSFULLY ---");
             sleep(20);
-            exit(121);
+            exit(0);
         }
     }
 }
@@ -1032,7 +1032,7 @@ void execNetBpfLoadDone() {
     const char* args[] = {"/apex/com.android.tethering/bin/netbpfload", "done", NULL};
     execve(args[0], (char**)args, environ);
     ALOGE("FATAL: execve(): %d[%s]", errno, strerror(errno));
-    exit(122);
+    exit(0);
 }
 
 void logVerbose(const char* msg) {
